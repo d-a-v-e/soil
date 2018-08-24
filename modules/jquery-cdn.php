@@ -5,7 +5,7 @@ namespace Roots\Soil\JqueryCDN;
 /**
  * Load jQuery from jQuery's CDN with a local fallback
  *
- * You can enable/disable this feature in functions.php (or app/setup.php if you're using Sage):
+ * You can enable/disable this feature in functions.php (or lib/setup.php if you're using Sage):
  * add_theme_support('soil-jquery-cdn');
  */
 function register_jquery() {
@@ -15,7 +15,7 @@ function register_jquery() {
 
   wp_register_script(
     'jquery',
-    'https://code.jquery.com/jquery-' . $jquery_version . '.min.js',
+    'https://ajax.googleapis.com/ajax/libs/jquery/' . $jquery_version . '/jquery.min.js',
     [],
     null,
     true
@@ -23,7 +23,7 @@ function register_jquery() {
 
   add_filter('wp_resource_hints', function ($urls, $relation_type) {
     if ($relation_type === 'dns-prefetch') {
-      $urls[] = 'code.jquery.com';
+      $urls[] = 'ajax.googleapis.com';
     }
     return $urls;
   }, 10, 2);
